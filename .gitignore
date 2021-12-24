@@ -8,4 +8,5 @@
 *.zip
 .DS_Store
 .idea/
-*.swp 
+*.swp
+*.code-workspace
