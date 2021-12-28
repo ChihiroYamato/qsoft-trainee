@@ -10,3 +10,6 @@
 .idea/
 *.swp
 *.code-workspace
+local/php_interface/vendor
+testing_code.php
+readme.md
