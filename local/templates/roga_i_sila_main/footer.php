@@ -70,7 +70,6 @@ Loc::loadMessages(__FILE__);
                         'ROOT_MENU_TYPE' => 'bottom',	// Тип меню для первого уровня
                         'USE_EXT' => 'N',	            // Подключать файлы с именами вида .тип_меню.menu_ext.php
                     ],
-                    false
                 );
                 ?>
                 </nav>
