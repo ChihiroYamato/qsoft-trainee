@@ -1,8 +1,8 @@
-<?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+<?php
+require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 $APPLICATION->SetTitle('Рога и Сила — главная страница');
 ?>
-		<section class="bg-white">
+        <section class="bg-white">
             <div data-slick-carousel>
                 <div class="relative banner">
                     <div class="w-full h-full bg-black"><img class="w-full h-full object-cover object-center opacity-70" src="/images/test_banner_1.jpg" alt="" title=""></div>
@@ -142,4 +142,4 @@ $APPLICATION->SetTitle('Рога и Сила — главная страница
                 </div>
             </div>
         </section>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+<?php require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

@@ -45,18 +45,26 @@
                     </div>
                 </div>
             </div>
-            <div class="mt-8 border-t sm:border-t-0 sm:mt-0 sm:border-l py-2 sm:pl-4 sm:pr-8">
-                <p class="text-3xl text-black font-bold mb-4">Информация</p>
-                <nav>
-                    <ul class="list-inside  bullet-list-item">
-                        <li><a class="text-gray-600 hover:text-orange" href="inner.html">О компании</a></li>
-                        <li><a class="text-orange cursor-default"      href="inner.html">Контактная информация</a></li>
-                        <li><a class="text-gray-600 hover:text-orange" href="inner.html">Условия продаж</a></li>
-                        <li><a class="text-gray-600 hover:text-orange" href="inner.html">Финансовый отдел</a></li>
-                        <li><a class="text-gray-600 hover:text-orange" href="inner.html">Для клиентов</a></li>
-                    </ul>
-                </nav>
-            </div>
+            <?php $APPLICATION->IncludeComponent(
+                'bitrix:menu',
+                'menu_footer',
+                [
+                    'ALLOW_MULTI_SELECT' => 'N',	// Разрешить несколько активных пунктов одновременно
+                    'CHILD_MENU_TYPE' => 'left',	// Тип меню для остальных уровней
+                    'DELAY' => 'N',	                // Откладывать выполнение шаблона меню
+                    'MAX_LEVEL' => '1',	            // Уровень вложенности меню
+                    'MENU_CACHE_GET_VARS' => [	    // Значимые переменные запроса
+                        0 => '',
+                    ],
+                    'MENU_CACHE_TIME' => '3600',	// Время кеширования (сек.)
+                    'MENU_CACHE_TYPE' => 'A',	    // Тип кеширования
+                    'MENU_CACHE_USE_GROUPS' => 'Y',	// Учитывать права доступа
+                    'ROOT_MENU_TYPE' => 'bottom',	// Тип меню для первого уровня
+                    'USE_EXT' => 'N',	            // Подключать файлы с именами вида .тип_меню.menu_ext.php
+                ],
+                false
+            );
+            ?>
         </section>
 
 

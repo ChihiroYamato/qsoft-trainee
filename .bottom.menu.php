@@ -1,67 +1,39 @@
-<?
-$aMenuLinks = Array(
-	Array(
-		"Информация",
-		"/",
-		Array(),
-		Array(),
-		""
-	),
-	Array(
-		"О компании",
-		"/company/about/",
-		Array(),
-		Array(),
-		""
-	),
-	Array(
-		"Контактная информация",
-		"/company/contacts/",
-		Array(),
-		Array(),
-		""
-	),
-	Array(
-		"Финансовая информация",
-		"/company/finances/",
-		Array(),
-		Array(),
-		""
-	),
-	Array(
-		"Отдел продаж",
-		"/company/department/",
-		Array(),
-		Array(),
-		""
-	),
-	Array(
-		"Для клиентов",
-		"/company/clients/",
-		Array(),
-		Array(),
-		""
-	),
-	Array(
-		"Ключевым клиентам",
-		"/company/clients/vip/",
-		Array(),
-		Array(),
-		""
-	),
-	Array(
-		"Новости",
-		"/company/news/",
-		Array(),
-		Array(),
-		""
-	),
-	Array(
-		"Наши салоны",
-		"/company/stores/",
-		Array(),
-		Array(),
-		""
-	)
-);
-?>
+<?php
+
+$aMenuLinks = [
+	[
+		'О компании',
+		'/company/about/',
+		[],
+		[],
+		''
+	],
+	[
+		'Контактная информация',
+		'/company/contacts/',
+		[],
+		[],
+		''
+	],
+	[
+		'Отдел продаж',
+		'/company/department/',
+		[],
+		['colore' => 'red'],
+		''
+	],
+	[
+		'Финансовый отдел',
+		'/company/finances/',
+		[],
+		[],
+		'isset($_SESSION["SESS_AUTH"]["AUTHORIZED"]) && $_SESSION["SESS_AUTH"]["AUTHORIZED"] === "Y"'
+	],
+	[
+		'Для клиентов',
+		'/company/clients/',
+		[],
+		[],
+		''
+	],
+];
