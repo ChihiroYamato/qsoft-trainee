@@ -27,7 +27,7 @@ $aMenuLinks = [
 		'/company/finances/',
 		[],
 		[],
-		'isset($_SESSION["SESS_AUTH"]["AUTHORIZED"]) && $_SESSION["SESS_AUTH"]["AUTHORIZED"] === "Y"'
+		'$USER->IsAuthorized()'
 	],
 	[
 		'Для клиентов',
