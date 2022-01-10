@@ -2,9 +2,6 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 
 $APPLICATION->SetTitle('Рога и Сила — главная страница');
-
-use Bitrix\Main\Localization\Loc;
-Loc::loadMessages(__FILE__);
 ?>
         <section class="bg-white">
             <div data-slick-carousel>
@@ -72,12 +69,6 @@ Loc::loadMessages(__FILE__);
                 </div>
             </div>
         </section>
-        <section class="news-block-inverse px-6 py-4">
-            <div>
-                <p class="inline-block text-3xl text-white font-bold mb-4"><?=Loc::getMessage('NEWS_BLOCK_NAME')?></p>
-                <span class="inline-block text-gray-200 pl-1"> / <a href="/company/news/" class="inline-block pl-1 text-gray-200 hover:text-orange"><b><?=Loc::getMessage('NEWS_PATH_NAME')?></b></a></span>
-            </div>
-            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
                 <?php $APPLICATION->IncludeComponent(
                     'bitrix:news.list',
                     'news_list_main',
@@ -139,10 +130,7 @@ Loc::loadMessages(__FILE__);
                         'SORT_ORDER1' => 'DESC',                            // Направление для первой сортировки новостей
                         'SORT_ORDER2' => 'ASC',                             // Направление для второй сортировки новостей
                         'STRICT_SECTION_CHECK' => 'N',                      // Строгая проверка раздела для показа списка
-                        'COMPONENT_TEMPLATE' => '.default'
+                        'COMPONENT_TEMPLATE' => '.default',
                     ],
-                    false,
                 );?>
-            </div>
-        </section>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
