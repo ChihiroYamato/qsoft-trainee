@@ -1,8 +1,9 @@
-<?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] .'/bitrix/header.php');
+
 $APPLICATION->SetTitle('Рога и Сила — главная страница');
 ?>
-		<section class="bg-white">
+        <section class="bg-white">
             <div data-slick-carousel>
                 <div class="relative banner">
                     <div class="w-full h-full bg-black"><img class="w-full h-full object-cover object-center opacity-70" src="/images/test_banner_1.jpg" alt="" title=""></div>
@@ -68,78 +69,68 @@ $APPLICATION->SetTitle('Рога и Сила — главная страница
                 </div>
             </div>
         </section>
-        <section class="news-block-inverse px-6 py-4">
-            <div>
-                <p class="inline-block text-3xl text-white font-bold mb-4">Новости</p>
-                <span class="inline-block text-gray-200 pl-1"> / <a href="news.html" class="inline-block pl-1 text-gray-200 hover:text-orange"><b>Все</b></a></span>
-            </div>
-            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="w-full flex">
-                    <div class="h-48 lg:h-auto w-32 sm:w-60 lg:w-32 xl:w-48 flex-none text-center overflow-hidden">
-                        <a class="block w-full h-full hover:opacity-75" href="article.html"><img src="/images/car_ceed.png" class="bg-white bg-opacity-25 w-full h-full object-contain" alt=""></a>
-                    </div>
-                    <div class="px-4 flex flex-col justify-between leading-normal">
-                        <div class="mb-8">
-                            <div class="text-white font-bold text-xl mb-2">
-                                <a class="hover:text-orange" href="article.html">Парадигма просветляет архетип</a>
-                            </div>
-                            <p class="text-gray-300 text-base">
-                                <a class="hover:text-orange" href="article.html">Парадигма просветляет архетип, таким образом, стратегия поведения, выгодная отдельному человеку</a>
-                            </p>
-                        </div>
-                        <div>
-                            <span class="text-sm text-white italic rounded bg-orange px-2">Киа Seed</span>
-                        </div>
-                        <div class="flex items-center">
-                            <p class="text-sm text-gray-400 italic">01 Янв 2013</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full flex">
-                    <div class="h-48 lg:h-auto w-32 sm:w-60 lg:w-32 xl:w-48 flex-none text-center overflow-hidden">
-                        <a class="block w-full h-full hover:opacity-75" href="article.html"><img src="/images/car_k900.png" class="bg-white bg-opacity-25 w-full h-full  object-contain" alt=""></a>
-                    </div>
-                    <div class="px-4 flex flex-col justify-between leading-normal">
-                        <div class="mb-8">
-                            <div class="text-white font-bold text-xl mb-2">
-                                <a class="hover:text-orange" href="article.html">Парадигма просветляет архетип</a>
-                            </div>
-                            <p class="text-gray-300 text-base">
-                                <a class="hover:text-orange" href="article.html">Парадигма просветляет архетип, таким образом, стратегия поведения, выгодная отдельному человеку</a>
-                            </p>
-                        </div>
-                        <div>
-                            <span class="text-sm text-white italic rounded bg-orange px-2">Парадигма</span>
-                            <span class="text-sm text-white italic rounded bg-orange px-2">Архетип</span>
-                            <span class="text-sm text-white italic rounded bg-orange px-2">Киа Seed</span>
-                        </div>
-                        <div class="flex items-center">
-                            <p class="text-sm text-gray-400 italic">01 Янв 2013</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full flex">
-                    <div class="h-48 lg:h-auto w-32 sm:w-60 lg:w-32 xl:w-48 flex-none text-center overflow-hidden">
-                        <a class="block w-full h-full hover:opacity-75" href="article.html"><img src="/images/car_soul.png" class="bg-white bg-opacity-25 w-full h-full  object-contain" alt=""></a>
-                    </div>
-                    <div class="px-4 flex flex-col justify-between leading-normal">
-                        <div class="mb-8">
-                            <div class="text-white font-bold text-xl mb-2">
-                                <a class="hover:text-orange" href="article.html">Парадигма просветляет архетип</a>
-                            </div>
-                            <p class="text-gray-300 text-base">
-                                <a class="hover:text-orange" href="article.html">Парадигма просветляет архетип, таким образом, стратегия поведения, выгодная отдельному человеку</a>
-                            </p>
-                        </div>
-                        <div>
-                            <span class="text-sm text-white italic rounded bg-orange px-2">Это</span>
-                            <span class="text-sm text-white italic rounded bg-orange px-2">Теги</span>
-                        </div>
-                        <div class="flex items-center">
-                            <p class="text-sm text-gray-400 italic">01 Янв 2013</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-<?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
+        <?php $APPLICATION->IncludeComponent(
+            'bitrix:news.list',
+            'news_list_main',
+            [
+                'ACTIVE_DATE_FORMAT' => 'j M Y',                    // Формат показа даты
+                'ADD_SECTIONS_CHAIN' => 'N',                        // Включать раздел в цепочку навигации
+                'AJAX_MODE' => 'N',                                 // Включить режим AJAX
+                'AJAX_OPTION_ADDITIONAL' => '',                     // Дополнительный идентификатор
+                'AJAX_OPTION_HISTORY' => 'N',                       // Включить эмуляцию навигации браузера
+                'AJAX_OPTION_JUMP' => 'N',                          // Включить прокрутку к началу компонента
+                'AJAX_OPTION_STYLE' => 'N',                         // Включить подгрузку стилей
+                'CACHE_FILTER' => 'N',                              // Кешировать при установленном фильтре
+                'CACHE_GROUPS' => 'Y',                              // Учитывать права доступа
+                'CACHE_TIME' => '36000000',                         // Время кеширования (сек.)
+                'CACHE_TYPE' => 'A',                                // Тип кеширования
+                'CHECK_DATES' => 'Y',                               // Показывать только активные на данный момент элементы
+                'DETAIL_URL' => '/company/news/#ELEMENT_CODE#/',    // URL страницы детального просмотра (по умолчанию - из настроек инфоблока)
+                'DISPLAY_BOTTOM_PAGER' => 'Y',                      // Выводить под списком
+                'DISPLAY_DATE' => 'Y',                              // Выводить дату элемента
+                'DISPLAY_NAME' => 'Y',                              // Выводить название элемента
+                'DISPLAY_PICTURE' => 'Y',                           // Выводить изображение для анонса
+                'DISPLAY_PREVIEW_TEXT' => 'Y',                      // Выводить текст анонса
+                'DISPLAY_TOP_PAGER' => 'N',                         // Выводить над списком
+                'FIELD_CODE' => [                                   // Поля
+                    0 => 'TAGS',
+                    1 => '',
+                ],
+                'FILTER_NAME' => '',                                // Фильтр
+                'HIDE_LINK_WHEN_NO_DETAIL' => 'N',                  // Скрывать ссылку, если нет детального описания
+                'IBLOCK_ID' => '5',                                 // Код информационного блока
+                'IBLOCK_TYPE' => 'news',                            // Тип информационного блока (используется только для проверки)
+                'INCLUDE_IBLOCK_INTO_CHAIN' => 'N',                 // Включать инфоблок в цепочку навигации
+                'INCLUDE_SUBSECTIONS' => 'Y',                       // Показывать элементы подразделов раздела
+                'MESSAGE_404' => '',                                // Сообщение для показа (по умолчанию из компонента)
+                'NEWS_COUNT' => '3',                                // Количество новостей на странице
+                'PAGER_BASE_LINK_ENABLE' => 'N',                    // Включить обработку ссылок
+                'PAGER_DESC_NUMBERING' => 'N',                      // Использовать обратную навигацию
+                'PAGER_DESC_NUMBERING_CACHE_TIME' => '36000',       // Время кеширования страниц для обратной навигации
+                'PAGER_SHOW_ALL' => 'N',                            // Показывать ссылку 'Все'
+                'PAGER_SHOW_ALWAYS' => 'N',                         // Выводить всегда
+                'PAGER_TEMPLATE' => '.default',                     // Шаблон постраничной навигации
+                'PAGER_TITLE' => 'Новости',                         // Название категорий
+                'PARENT_SECTION' => '',                             // ID раздела
+                'PARENT_SECTION_CODE' => '',                        // Код раздела
+                'PREVIEW_TRUNCATE_LEN' => '150',                       // Максимальная длина анонса для вывода (только для типа текст)
+                'PROPERTY_CODE' => [                                // Свойства
+                    0 => '',
+                    1 => '',
+                ],
+                'SET_BROWSER_TITLE' => 'N',                         // Устанавливать заголовок окна браузера
+                'SET_LAST_MODIFIED' => 'N',                         // Устанавливать в заголовках ответа время модификации страницы
+                'SET_META_DESCRIPTION' => 'N',                      // Устанавливать описание страницы
+                'SET_META_KEYWORDS' => 'N',                         // Устанавливать ключевые слова страницы
+                'SET_STATUS_404' => 'N',                            // Устанавливать статус 404
+                'SET_TITLE' => 'N',                                 // Устанавливать заголовок страницы
+                'SHOW_404' => 'N',                                  // Показ специальной страницы
+                'SORT_BY1' => 'ACTIVE_FROM',                        // Поле для первой сортировки новостей
+                'SORT_BY2' => 'SORT',                               // Поле для второй сортировки новостей
+                'SORT_ORDER1' => 'DESC',                            // Направление для первой сортировки новостей
+                'SORT_ORDER2' => 'ASC',                             // Направление для второй сортировки новостей
+                'STRICT_SECTION_CHECK' => 'N',                      // Строгая проверка раздела для показа списка
+                'COMPONENT_TEMPLATE' => '.default',
+            ],
+        );?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php');?>
