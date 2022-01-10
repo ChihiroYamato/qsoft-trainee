@@ -5,16 +5,16 @@ use \Bitrix\Main\Page\Asset;
 
 $asset = Asset::getInstance();
 
-$asset->addCss(SITE_TEMPLATE_PATH . '/vendor/css/form.css');
-$asset->addCss(SITE_TEMPLATE_PATH . '/vendor/css/tailwind.css');
-$asset->addCss(SITE_TEMPLATE_PATH . '/vendor/css/base.css');
+$asset->addCss(SITE_TEMPLATE_DEFAULT . '/vendor/css/form.css');
+$asset->addCss(SITE_TEMPLATE_DEFAULT . '/vendor/css/tailwind.css');
+$asset->addCss(SITE_TEMPLATE_DEFAULT . '/vendor/css/base.css');
 
-$asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/jquery-3.6.0.js');
+$asset->addJs(SITE_TEMPLATE_DEFAULT . '/vendor/js/jquery-3.6.0.js');
 
-$asset->addCss(SITE_TEMPLATE_PATH . '/vendor/css/slick.css');
-$asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/slick.js');
+$asset->addCss(SITE_TEMPLATE_DEFAULT . '/vendor/css/slick.css');
+$asset->addJs(SITE_TEMPLATE_DEFAULT . '/vendor/js/slick.js');
 
-$asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/script.js');
+$asset->addJs(SITE_TEMPLATE_DEFAULT . '/vendor/js/script.js');
 ?>
 <!doctype html>
 <html class="antialiased" lang="ru">
@@ -30,7 +30,7 @@ $asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/script.js');
             <div class="container mx-auto block sm:flex sm:justify-between sm:items-center py-4 px-4 sm:px-0 space-y-4 sm:space-y-0">
                 <div class="flex justify-center">
                     <span class="inline-block sm:inline">
-                        <img src="<?=SITE_TEMPLATE_PATH?>/vendor/images/logo.png" width="222" height="30" alt="">
+                        <img src="<?=SITE_TEMPLATE_DEFAULT?>/vendor/images/logo.png" width="222" height="30" alt="">
                     </span>
                 </div>
                 <div>
