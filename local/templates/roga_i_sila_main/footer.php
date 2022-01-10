@@ -1,7 +1,7 @@
 <?php
 if (! defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {die();}
 
-use Bitrix\Main\Localization\Loc;
+use \Bitrix\Main\Localization\Loc;
 Loc::loadMessages(__FILE__);
 ?>
     </main>
@@ -51,7 +51,7 @@ Loc::loadMessages(__FILE__);
                 </div>
             </div>
             <div class="mt-8 border-t sm:border-t-0 sm:mt-0 sm:border-l py-2 sm:pl-4 sm:pr-8">
-                <p class="text-3xl text-black font-bold mb-4"><?=Loc::getMessage('MENU_INFORMATION')?></p>
+                <p class="text-3xl text-black font-bold mb-4"><?=Loc::getMessage('BOTTOM_MENU_FOOTER')?></p>
                 <nav>
                 <?php $APPLICATION->IncludeComponent(
                     'bitrix:menu',
@@ -70,8 +70,7 @@ Loc::loadMessages(__FILE__);
                         'ROOT_MENU_TYPE' => 'bottom',	// Тип меню для первого уровня
                         'USE_EXT' => 'N',	            // Подключать файлы с именами вида .тип_меню.menu_ext.php
                     ],
-                );
-                ?>
+                );?>
                 </nav>
             </div>
         </section>
