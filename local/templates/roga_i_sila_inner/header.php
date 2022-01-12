@@ -121,7 +121,7 @@ $asset->addJs(SITE_TEMPLATE_DEFAULT . '/vendor/js/script.js');
                             <p class="text-xl text-black font-bold mb-4"><?=Loc::getMessage('BOTTOM_MENU_HEADER')?></p>
                             <?php $APPLICATION->IncludeComponent(
                                 'bitrix:menu',
-                                'menu_footer',
+                                'menu_left',
                                 [
                                     'ALLOW_MULTI_SELECT' => 'N',	// Разрешить несколько активных пунктов одновременно
                                     'CHILD_MENU_TYPE' => 'left',	// Тип меню для остальных уровней
@@ -135,7 +135,6 @@ $asset->addJs(SITE_TEMPLATE_DEFAULT . '/vendor/js/script.js');
                                     'MENU_CACHE_USE_GROUPS' => 'Y',	// Учитывать права доступа
                                     'ROOT_MENU_TYPE' => 'bottom',	// Тип меню для первого уровня
                                     'USE_EXT' => 'N',	            // Подключать файлы с именами вида .тип_меню.menu_ext.php
-                                    'ALT_UL_CLASS' => 'space-y-2',  // (пользовательный) Альтернативный класс для тега ul
                                 ],
                             );?>
                         </li>
