@@ -1,113 +1,96 @@
-<?
-if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true) die();
+<?php
+if (! defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {die();}
 
-$site = ($_REQUEST["site"] <> ''? $_REQUEST["site"] : ($_REQUEST["src_site"] <> ''? $_REQUEST["src_site"] : false));
-$arMenu = GetMenuTypes($site);
+if (! \Bitrix\Main\Loader::includeModule('iblock')) {return;}
 
-$arComponentParameters = array(
-	"GROUPS" => array(
-		"CACHE_SETTINGS" => array(
-			"NAME" => GetMessage("COMP_GROUP_CACHE_SETTINGS"),
-			"SORT" => 600
-		),
-	),
-	"PARAMETERS" => array(
+$arIBlocksTypes = CIBlockParameters::GetIBlockTypes();
 
-		"ROOT_MENU_TYPE" => Array(
-			"NAME"=>GetMessage("MAIN_MENU_TYPE_NAME"),
-			"TYPE" => "LIST",
-			"DEFAULT"=>'left',
-			"VALUES" => $arMenu,
-			"ADDITIONAL_VALUES"	=> "Y",
-			"DEFAULT"=>'left',
-			"PARENT" => "BASE",
-			"COLS" => 45
-		),
-
-		"MAX_LEVEL" => Array(
-			"NAME"=>GetMessage("MAX_LEVEL_NAME"),
-			"TYPE" => "LIST",
-			"DEFAULT"=>'1',
-			"PARENT" => "ADDITIONAL_SETTINGS",
-			"VALUES" => Array(
-				1 => "1",
-				2 => "2",
-				3 => "3",
-				4 => "4",
-			),
-			"ADDITIONAL_VALUES"	=> "N",
-		),
-
-		"CHILD_MENU_TYPE" => Array(
-			"NAME"=>GetMessage("CHILD_MENU_TYPE_NAME"),
-			"TYPE" => "LIST",
-			"DEFAULT"=>'left',
-			"VALUES" => $arMenu,
-			"ADDITIONAL_VALUES"	=> "Y",
-			"PARENT" => "ADDITIONAL_SETTINGS",
-			"DEFAULT"=>'left',
-			"COLS" => 45
-		),
-
-		"USE_EXT" => Array(
-			"NAME"=>GetMessage("USE_EXT_NAME"),
-			"TYPE" => "CHECKBOX",
-			"DEFAULT"=>'N',
-			"PARENT" => "ADDITIONAL_SETTINGS",
-		),
-		
-		"DELAY" => Array(
-			"NAME"=>GetMessage("DELAY_NAME"),
-			"TYPE" => "CHECKBOX",
-			"DEFAULT"=>'N',
-			"PARENT" => "ADDITIONAL_SETTINGS",
-		),
-
-		"ALLOW_MULTI_SELECT" => Array(
-			"NAME"=>GetMessage("comp_menu_allow_multi_select"),
-			"TYPE" => "CHECKBOX",
-			"DEFAULT"=>'N',
-			"PARENT" => "ADDITIONAL_SETTINGS",
-		),
-
-		"MENU_CACHE_TYPE" => array(
-			"PARENT" => "CACHE_SETTINGS",
-			"NAME" => GetMessage("COMP_PROP_CACHE_TYPE"),
-			"TYPE" => "LIST",
-			"VALUES" => array(
-				"A" => GetMessage("COMP_PROP_CACHE_TYPE_AUTO"),
-				"Y" => GetMessage("COMP_PROP_CACHE_TYPE_YES"),
-				"N" => GetMessage("COMP_PROP_CACHE_TYPE_NO"),
-			),
-			"DEFAULT" => "N",
-			"ADDITIONAL_VALUES" => "N",
-		),
-
-		"MENU_CACHE_TIME" => array(
-			"PARENT" => "CACHE_SETTINGS",
-			"NAME" => GetMessage("COMP_PROP_CACHE_TIME"),
-			"TYPE" => "STRING",
-			"MULTIPLE" => "N",
-			"DEFAULT" => 3600,
-			"COLS" => 5,
-		),
-
-		"MENU_CACHE_USE_GROUPS" => array(
-			"PARENT" => "CACHE_SETTINGS",
-			"NAME" => GetMessage("CP_BM_MENU_CACHE_USE_GROUPS"),
-			"TYPE" => "CHECKBOX",
-			"DEFAULT" => "Y",
-		),
-
-		"MENU_CACHE_GET_VARS" => array(
-			"PARENT" => "CACHE_SETTINGS",
-			"NAME" => GetMessage("CP_BM_MENU_CACHE_GET_VARS"),
-			"TYPE" => "STRING",
-			"MULTIPLE" => "Y",
-			"DEFAULT" => "",
-			"COLS" => 15,
-		),
-
-	)
+$iBlockDB = CIBlock::GetList(
+    ['SORT' => 'ASC'],
+    [
+        'SITE_ID' => $_REQUEST['site'],
+        'TYPE' => $arCurrentValues['IBLOCK_TYPE'],
+    ]
 );
-?>
+$arIBlocks = [];
+while ($arRes = $iBlockDB->Fetch()) {
+	$arIBlocks[$arRes['ID']] = "[{$arRes['ID']}] {$arRes['NAME']}";
+}
+
+$arComponentParameters = [
+    'GROUPS' => [
+        'CACHE_SETTINGS' => [
+            'NAME' => GetMessage('COMP_GROUP_CACHE_SETTINGS'),
+            'SORT' => 800
+        ],
+    ],
+    'PARAMETERS' => [
+        'IBLOCK_TYPE' => [
+            'PARENT' => 'BASE',
+            'NAME' => GetMessage('IBLOCK_TYPE_NAME'),
+            'TYPE' => 'LIST',
+            'VALUES' => $arIBlocksTypes,
+            'DEFAULT' => 'salons',
+            'ADDITIONAL_VALUES' => 'N',
+            'REFRESH' => 'Y',
+        ],
+        'IBLOCK_ID' => [
+            'PARENT' => 'BASE',
+            'NAME' => GetMessage('IBLOCK_ID_NAME'),
+            'TYPE' => 'LIST',
+            'VALUES' => $arIBlocks,
+            'DEFAULT' => '4',
+            'ADDITIONAL_VALUES' => 'N',
+        ],
+        'ELEMENT_COUNT' => [
+            'PARENT' => 'BASE',
+            'NAME' => GetMessage('ELEMENT_COUNT_NAME'),
+            'TYPE' => 'STRING',
+            'DEFAULT' => '2',
+            'ADDITIONAL_VALUES' => 'Y',
+        ],
+        'SORT_BY' => [
+            'PARENT' => 'DATA_SOURCE',
+            'NAME' => GetMessage('SORT_BY_NAME'),
+            'TYPE' => 'LIST',
+            'DEFAULT' => 'RAND',
+            'VALUES' => [
+                'RAND' => GetMessage('DESC_RAND_NAME'),
+                'ID' => GetMessage('DESC_ID_NAME'),
+                'NAME' => GetMessage('DESC_NAME_NAME'),
+                'ACTIVE_FROM' => GetMessage('DESC_ACT_NAME'),
+                'TIMESTAMP_X' => GetMessage('DESC_TSAMP_NAME'),
+            ],
+            'ADDITIONAL_VALUES' => 'N',
+        ],
+        'SORT_ORDER' => [
+            'PARENT' => 'DATA_SOURCE',
+            'NAME' => GetMessage('SORT_ORDER_NAME'),
+            'TYPE' => 'LIST',
+            'DEFAULT' => 'DESC',
+            'VALUES' => [
+                'ASC' => GetMessage('IBLOCK_DESC_ASC'),
+                'DESC' => GetMessage('IBLOCK_DESC_DESC')
+            ],
+            'ADDITIONAL_VALUES' => 'N',
+        ],
+        'DETAILS_URL' => [
+            'PARENT' => 'ADDITIONAL_SETTINGS',
+            'NAME' => GetMessage('DETAILS_URL_NAME'),
+            'TYPE' => 'STRING',
+            'DEFAULT' => '/company/stores/',
+        ],
+        'MENU_CACHE_TYPE' => [
+            'PARENT' => 'CACHE_SETTINGS',
+            'NAME' => GetMessage('COMP_PROP_CACHE_TYPE'),
+            'TYPE' => 'LIST',
+            'VALUES' => [
+                'A' => GetMessage('COMP_PROP_CACHE_TYPE_AUTO'),
+                'Y' => GetMessage('COMP_PROP_CACHE_TYPE_YES'),
+                'N' => GetMessage('COMP_PROP_CACHE_TYPE_NO'),
+            ],
+            'DEFAULT' => 'A',
+            'ADDITIONAL_VALUES' => 'N',
+        ],
+    ],
+];
