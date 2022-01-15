@@ -48,6 +48,7 @@ $selectFieldsDB = [
 if ($requestDB = CIBlockElement::GetList($orderDB, $filterDB, false, $navParamsDB, $selectFieldsDB)) {
     while ($responseDB = $requestDB->GetNext()) {
         $arResponse = [];
+        $arResponse['ID'] = $responseDB['~ID'];
         $arResponse['NAME'] = $responseDB['~NAME'];
         $arResponse['PREVIEW_PICTURE'] = CFile::GetFileArray($responseDB['~PREVIEW_PICTURE'])['SRC'];
         $arResponse['DETAIL_PAGE_URL'] = $responseDB['~DETAIL_PAGE_URL'];
@@ -55,8 +56,27 @@ if ($requestDB = CIBlockElement::GetList($orderDB, $filterDB, false, $navParamsD
         $arResponse['PHONE'] = $responseDB['~PROPERTY_PHONE_VALUE'];
         $arResponse['ADDRESS'] = $responseDB['~PROPERTY_ADDRESS_VALUE'];
 
-        $arResult[] = $arResponse;
+        $arResult['ITEMS'][$arResponse['ID']] = $arResponse;
     }
 }
+
+// Component bottons
+if ($arResult['SHOW_BOTTONS'] = $APPLICATION->GetShowIncludeAreas()) {
+    $options = ['SECTION_BUTTONS' => false, 'SESSID' => false];
+
+    $componentButtons = CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], 0, 0, $options);
+    $this->addIncludeAreaIcons(CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $componentButtons));
+
+    if (! empty($arResult['ITEMS'])) {
+        foreach ($arResult['ITEMS'] as $id => &$item) {
+            $elementButtons = CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], $id, 0, $options);
+            $item['EDIT_LINK'] = $elementButtons['edit']['edit_element']['ACTION_URL'];
+            $item['DELETE_LINK'] = $elementButtons['edit']['delete_element']['ACTION_URL'];
+        }
+    }
+}
+// echo '<pre>';
+// var_dump(CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $componentButtons));
+// echo '</pre>';
 
 $this->IncludeComponentTemplate();

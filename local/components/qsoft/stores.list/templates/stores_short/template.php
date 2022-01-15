@@ -8,8 +8,12 @@
         <?php endif?>
     </div>
     <div class="grid gap-6 grid-cols-1 lg:grid-cols-2">
-        <?php foreach ($arResult as $item) :?>
-            <div class="w-full flex">
+        <?php foreach ($arResult['ITEMS'] as $item) :
+            if ($arResult['SHOW_BOTTONS']) :
+                $this->AddEditAction($item['ID'], $item['EDIT_LINK'], GetMessage('EDIT_LINK_TEXT'));
+                $this->AddDeleteAction($item['ID'], $item['DELETE_LINK'], GetMessage('DELETE_LINK_TEXT'), ['CONFIRM' => GetMessage('DELETE_CONFIRM')]);
+            endif?>
+            <div class="w-full flex" id="<?=$this->GetEditAreaId($item['ID'])?>">
                 <div class="h-48 lg:h-auto w-32 xl:w-48 flex-none text-center rounded-lg overflow-hidden">
                     <a class="block w-full h-full hover:opacity-75" href="<?=$item['DETAIL_PAGE_URL']?>"><img src="<?=$item['PREVIEW_PICTURE']?>" class="w-full h-full object-cover" alt=""></a>
                 </div>
