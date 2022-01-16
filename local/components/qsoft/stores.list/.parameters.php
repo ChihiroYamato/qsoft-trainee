@@ -18,12 +18,6 @@ while ($arRes = $iBlockDB->Fetch()) {
 }
 
 $arComponentParameters = [
-    'GROUPS' => [
-        'CACHE_SETTINGS' => [
-            'NAME' => GetMessage('COMP_GROUP_CACHE_SETTINGS'),
-            'SORT' => 800
-        ],
-    ],
     'PARAMETERS' => [
         'IBLOCK_TYPE' => [
             'PARENT' => 'BASE',
@@ -80,17 +74,11 @@ $arComponentParameters = [
             'TYPE' => 'STRING',
             'DEFAULT' => '/company/stores/',
         ],
-        'MENU_CACHE_TYPE' => [
+        'CACHE_TIME' => [
             'PARENT' => 'CACHE_SETTINGS',
-            'NAME' => GetMessage('COMP_PROP_CACHE_TYPE'),
-            'TYPE' => 'LIST',
-            'VALUES' => [
-                'A' => GetMessage('COMP_PROP_CACHE_TYPE_AUTO'),
-                'Y' => GetMessage('COMP_PROP_CACHE_TYPE_YES'),
-                'N' => GetMessage('COMP_PROP_CACHE_TYPE_NO'),
-            ],
-            'DEFAULT' => 'A',
-            'ADDITIONAL_VALUES' => 'N',
+            'NAME' => GetMessage('COMP_PROP_CACHE_TIME'),
+            'TYPE' => 'STRING',
+            'DEFAULT' => '3600',
         ],
     ],
 ];

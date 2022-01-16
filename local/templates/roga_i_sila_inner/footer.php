@@ -17,9 +17,10 @@ Loc::loadMessages(__FILE__);
                     'ELEMENT_COUNT' => '2',
                     'IBLOCK_ID' => '4',
                     'IBLOCK_TYPE' => 'salons',
-                    'MENU_CACHE_TYPE' => 'A',
                     'SORT_BY' => 'RAND',
                     'SORT_ORDER' => 'DESC',
+                    'CACHE_TYPE' => 'A',
+                    'CACHE_TIME' => '3600',
                 ]
             );?>
             <div class="mt-8 border-t sm:border-t-0 sm:mt-0 sm:border-l py-2 sm:pl-4 sm:pr-8">
