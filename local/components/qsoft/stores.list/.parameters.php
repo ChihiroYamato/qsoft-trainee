@@ -3,18 +3,19 @@ if (! defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {die();}
 
 if (! \Bitrix\Main\Loader::includeModule('iblock')) {return;}
 
-$arIBlocksTypes = CIBlockParameters::GetIBlockTypes();
+$arIBlocksTypes = \CIBlockParameters::GetIBlockTypes();
 
-$iBlockDB = CIBlock::GetList(
+$requestDB = \CIBlock::GetList(
     ['SORT' => 'ASC'],
     [
         'SITE_ID' => $_REQUEST['site'],
         'TYPE' => $arCurrentValues['IBLOCK_TYPE'],
     ]
 );
+
 $arIBlocks = [];
-while ($arRes = $iBlockDB->Fetch()) {
-	$arIBlocks[$arRes['ID']] = "[{$arRes['ID']}] {$arRes['NAME']}";
+while ($responseDB = $requestDB->GetNext()) {
+	$arIBlocks[$responseDB['~ID']] = "[{$responseDB['~ID']}] {$responseDB['~NAME']}";
 }
 
 $arComponentParameters = [

@@ -12,10 +12,11 @@ $arParams['CACHE_TIME'] = ($arParams['CACHE_TIME'] > 0) ? $arParams['CACHE_TIME'
 $buttobOptions = ['SECTION_BUTTONS' => false, 'SESSID' => false];
 if ($APPLICATION->GetShowIncludeAreas()) {
     if (Loader::includeModule('iblock')) {
-        $componentButtons = CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], 0, 0, $buttobOptions);
-        $this->addIncludeAreaIcons(CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $componentButtons));
+        $componentButtons = \CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], 0, 0, $buttobOptions);
+        $this->addIncludeAreaIcons(\CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $componentButtons));
     }
 }
+
 
 $userGroups = $USER->GetGroups();
 
@@ -51,16 +52,20 @@ if ($this->startResultCache(false, $userGroups)) {
     ];
 
     //Request to DB
-    if ($requestDB = CIBlockElement::GetList($orderDB, $filterDB, false, $navParamsDB, $selectFieldsDB)) {
+    if ($requestDB = \CIBlockElement::GetList($orderDB, $filterDB, false, $navParamsDB, $selectFieldsDB)) {
+        $responseDB = [];
+        $imageFilter = '';
         while ($responseDB = $requestDB->GetNext()) {
             $arResponse = [];
             $arResponse['ID'] = $responseDB['~ID'];
             $arResponse['NAME'] = $responseDB['~NAME'];
-            $arResponse['PREVIEW_PICTURE'] = CFile::GetFileArray($responseDB['~PREVIEW_PICTURE'])['SRC'];
             $arResponse['DETAIL_PAGE_URL'] = $responseDB['~DETAIL_PAGE_URL'];
             $arResponse['WORK_HOURS'] = $responseDB['~PROPERTY_WORK_HOURS_VALUE'];
             $arResponse['PHONE'] = $responseDB['~PROPERTY_PHONE_VALUE'];
             $arResponse['ADDRESS'] = $responseDB['~PROPERTY_ADDRESS_VALUE'];
+
+            $arResponse['PREVIEW_PICTURE'] = $responseDB['~PREVIEW_PICTURE'];
+            $imageFilter .= isset($responseDB['~PREVIEW_PICTURE']) ? $responseDB['~PREVIEW_PICTURE']  . ',' : '';
 
             $arResponse['EDIT_LINK'] = '';
             $arResponse['DELETE_LINK'] = '';
@@ -68,18 +73,36 @@ if ($this->startResultCache(false, $userGroups)) {
             $arResult['ITEMS'][$arResponse['ID']] = $arResponse;
         }
 
-        // Component elements bottons
-        if (! empty($arResult['ITEMS']) && ($USER->isAdmin() || preg_match('~7|8~', $userGroups))) {
-            foreach ($arResult['ITEMS'] as $id => &$item) {
-                $elementButtons = CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], $id, 0, $buttobOptions);
-                $item['EDIT_LINK'] = $elementButtons['edit']['edit_element']['ACTION_URL'];
-                $item['DELETE_LINK'] = $elementButtons['edit']['delete_element']['ACTION_URL'];
+        if (! empty($arResult['ITEMS'])) {
+
+            // Matching elements with pictures by ID
+            if (! empty($imageFilter)) {
+                $imageFilter = rtrim($imageFilter, ',');
+
+                if ($requestFilesDB = \CFile::GetList([], ['MODULE_ID' => 'iblock', '@ID' => $imageFilter])) {
+                    $imagesSRC = [];
+                    while ($responseFilesDB = $requestFilesDB->GetNext()) {
+                        $imagesSRC[$responseFilesDB['~ID']] = \CFile::GetFileSRC($responseFilesDB);
+                    }
+                }
+            }
+
+            foreach ($arResult['ITEMS'] as &$item) {
+                $item['PREVIEW_PICTURE'] = $imagesSRC[$item['PREVIEW_PICTURE']] ?? NO_IMAGE_PATH;
+            }
+
+            // Component elements bottons
+            if ($USER->isAdmin() || preg_match('~7|8~', $userGroups)) {
+                foreach ($arResult['ITEMS'] as $id => &$item) {
+                    $elementButtons = \CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], $id, 0, $buttobOptions);
+                    $item['EDIT_LINK'] = $elementButtons['edit']['edit_element']['ACTION_URL'];
+                    $item['DELETE_LINK'] = $elementButtons['edit']['delete_element']['ACTION_URL'];
+                }
             }
         }
 
-    } else {
-        $this->abortResultCache();
     }
+
     $this->setResultCacheKeys([]);
     $this->IncludeComponentTemplate();
 }

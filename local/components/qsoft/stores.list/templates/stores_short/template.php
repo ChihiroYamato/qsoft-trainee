@@ -1,5 +1,5 @@
 <?php if (! defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {die();}?>
-<?php if (! empty($arResult)) :?>
+<?php if (! empty($arResult['ITEMS'])) :?>
 <div class="flex-1">
     <div>
         <p class="inline-block text-3xl text-black font-bold mb-4"><?=getMessage('STORES_BLOCK_NAME')?></p>
