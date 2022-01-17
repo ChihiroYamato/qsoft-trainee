@@ -9,18 +9,16 @@ $arParams['CACHE_TIME'] = (! empty($arParams['CACHE_TIME'])) ? intval($arParams[
 $arParams['CACHE_TIME'] = ($arParams['CACHE_TIME'] > 0) ? $arParams['CACHE_TIME'] : 3600;
 
 // Component bottons
-$buttobOptions = ['SECTION_BUTTONS' => false, 'SESSID' => false];
-if ($APPLICATION->GetShowIncludeAreas()) {
+$buttons = [];
+if ($buttons['show'] = $APPLICATION->GetShowIncludeAreas()) {
+    $buttons['options'] = ['SECTION_BUTTONS' => false, 'SESSID' => false];
     if (Loader::includeModule('iblock')) {
-        $componentButtons = \CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], 0, 0, $buttobOptions);
+        $componentButtons = \CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], 0, 0, $buttons['options']);
         $this->addIncludeAreaIcons(\CIBlock::GetComponentMenu($APPLICATION->GetPublicShowMode(), $componentButtons));
     }
 }
 
-
-$userGroups = $USER->GetGroups();
-
-if ($this->startResultCache(false, $userGroups)) {
+if ($this->startResultCache(false, $buttons['show'])) {
     if (! Loader::includeModule('iblock')) {
         $this->abortResultCache();
         return;
@@ -54,31 +52,23 @@ if ($this->startResultCache(false, $userGroups)) {
     //Request to DB
     if ($requestDB = \CIBlockElement::GetList($orderDB, $filterDB, false, $navParamsDB, $selectFieldsDB)) {
         $responseDB = [];
-        $imageFilter = '';
+        $imageFilter = [];
         while ($responseDB = $requestDB->GetNext()) {
-            $arResponse = [];
-            $arResponse['ID'] = $responseDB['~ID'];
-            $arResponse['NAME'] = $responseDB['~NAME'];
-            $arResponse['DETAIL_PAGE_URL'] = $responseDB['~DETAIL_PAGE_URL'];
-            $arResponse['WORK_HOURS'] = $responseDB['~PROPERTY_WORK_HOURS_VALUE'];
-            $arResponse['PHONE'] = $responseDB['~PROPERTY_PHONE_VALUE'];
-            $arResponse['ADDRESS'] = $responseDB['~PROPERTY_ADDRESS_VALUE'];
+            $arResult['ITEMS'][$responseDB['ID']] = $responseDB;
 
-            $arResponse['PREVIEW_PICTURE'] = $responseDB['~PREVIEW_PICTURE'];
-            $imageFilter .= isset($responseDB['~PREVIEW_PICTURE']) ? $responseDB['~PREVIEW_PICTURE']  . ',' : '';
+            $arResult['ITEMS'][$responseDB['ID']]['EDIT_LINK'] = '';
+            $arResult['ITEMS'][$responseDB['ID']]['DELETE_LINK'] = '';
 
-            $arResponse['EDIT_LINK'] = '';
-            $arResponse['DELETE_LINK'] = '';
+            if (isset($responseDB['PREVIEW_PICTURE'])) {
+                $imageFilter[] = $responseDB['PREVIEW_PICTURE'];
+            }
 
-            $arResult['ITEMS'][$arResponse['ID']] = $arResponse;
         }
 
         if (! empty($arResult['ITEMS'])) {
 
             // Matching elements with pictures by ID
             if (! empty($imageFilter)) {
-                $imageFilter = rtrim($imageFilter, ',');
-
                 if ($requestFilesDB = \CFile::GetList([], ['MODULE_ID' => 'iblock', '@ID' => $imageFilter])) {
                     $imagesSRC = [];
                     while ($responseFilesDB = $requestFilesDB->GetNext()) {
@@ -92,9 +82,9 @@ if ($this->startResultCache(false, $userGroups)) {
             }
 
             // Component elements bottons
-            if ($USER->isAdmin() || preg_match('~7|8~', $userGroups)) {
+            if ($buttons['show']) {
                 foreach ($arResult['ITEMS'] as $id => &$item) {
-                    $elementButtons = \CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], $id, 0, $buttobOptions);
+                    $elementButtons = \CIBlock::GetPanelButtons($arParams['IBLOCK_ID'], $id, 0, $buttons['options']);
                     $item['EDIT_LINK'] = $elementButtons['edit']['edit_element']['ACTION_URL'];
                     $item['DELETE_LINK'] = $elementButtons['edit']['delete_element']['ACTION_URL'];
                 }

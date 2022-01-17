@@ -23,9 +23,9 @@
                             <a class="hover:text-orange" href="<?=$item['DETAIL_PAGE_URL']?>"><?=$item['NAME']?></a>
                         </div>
                         <div class="text-base space-y-2">
-                            <p class="text-gray-400"><?=$item['ADDRESS']?></p>
-                            <p class="text-black"><?=$item['PHONE']?></p>
-                            <p class="text-sm"><?=getMessage('WORK_HOURS')?>:<br><?=$item['WORK_HOURS']?></p>
+                            <p class="text-gray-400"><?=$item['PROPERTY_ADDRESS_VALUE']?></p>
+                            <p class="text-black"><?=$item['PROPERTY_PHONE_VALUE']?></p>
+                            <p class="text-sm"><?=getMessage('WORK_HOURS')?>:<br><?=$item['PROPERTY_WORK_HOURS_VALUE']?></p>
                         </div>
                     </div>
                 </div>
