@@ -7,7 +7,11 @@
     </div>
     <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
         <?php foreach ($arResult['ITEMS'] as $item) :?>
-            <div class="w-full flex">
+            <?php
+            $this->AddEditAction($item['ID'], $item['EDIT_LINK'], GetMessage('EDIT_LINK_TEXT'));
+            $this->AddDeleteAction($item['ID'], $item['DELETE_LINK'], GetMessage('DELETE_LINK_TEXT'), ['CONFIRM' => GetMessage('DELETE_CONFIRM')]);
+            ?>
+            <div class="w-full flex" id="<?=$this->GetEditAreaId($item['ID'])?>">
                 <div class="h-48 lg:h-auto w-32 sm:w-60 lg:w-32 xl:w-48 flex-none text-center overflow-hidden">
                     <a class="block w-full h-full hover:opacity-75" href="<?=$item['DETAIL_PAGE_URL']?>"><img src="<?=$item['PREVIEW_PICTURE']['SRC'] ?? NO_IMAGE_PATH?>" class="bg-white bg-opacity-25 w-full h-full object-contain" alt=""></a>
                 </div>
