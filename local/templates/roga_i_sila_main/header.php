@@ -5,16 +5,16 @@ use \Bitrix\Main\Page\Asset;
 
 $asset = Asset::getInstance();
 
-$asset->addCss(SITE_TEMPLATE_PATH . '/vendor/css/form.css');
-$asset->addCss(SITE_TEMPLATE_PATH . '/vendor/css/tailwind.css');
-$asset->addCss(SITE_TEMPLATE_PATH . '/vendor/css/base.css');
+$asset->addCss(SITE_TEMPLATE_DEFAULT . '/vendor/css/form.css');
+$asset->addCss(SITE_TEMPLATE_DEFAULT . '/vendor/css/tailwind.css');
+$asset->addCss(SITE_TEMPLATE_DEFAULT . '/vendor/css/base.css');
 
-$asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/jquery-3.6.0.js');
+$asset->addJs(SITE_TEMPLATE_DEFAULT . '/vendor/js/jquery-3.6.0.js');
 
-$asset->addCss(SITE_TEMPLATE_PATH . '/vendor/css/slick.css');
-$asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/slick.js');
+$asset->addCss(SITE_TEMPLATE_DEFAULT . '/vendor/css/slick.css');
+$asset->addJs(SITE_TEMPLATE_DEFAULT . '/vendor/js/slick.js');
 
-$asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/script.js');
+$asset->addJs(SITE_TEMPLATE_DEFAULT . '/vendor/js/script.js');
 ?>
 <!doctype html>
 <html class="antialiased" lang="ru">
@@ -30,28 +30,24 @@ $asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/script.js');
             <div class="container mx-auto block sm:flex sm:justify-between sm:items-center py-4 px-4 sm:px-0 space-y-4 sm:space-y-0">
                 <div class="flex justify-center">
                     <span class="inline-block sm:inline">
-                        <img src="<?=SITE_TEMPLATE_PATH?>/vendor/images/logo.png" width="222" height="30" alt="">
+                        <img src="<?=SITE_TEMPLATE_DEFAULT?>/vendor/images/logo.png" width="222" height="30" alt="">
                     </span>
                 </div>
                 <div>
-                    <ul class="flex justify-center sm:justify-end items-center space-x-8 text-sm">
-                        <li>
-                            <a class="text-gray-500 hover:text-orange" href="authorized.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block text-orange h-4 w-4" fill="currentColor" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                </svg>
-                                Регистрация
-                            </a>
-                        </li>
-                        <li>
-                            <a class="text-gray-500 hover:text-orange" href="form.html">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block text-orange h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
-                                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd" />
-                                </svg>
-                                Авторизация
-                            </a>
-                        </li>
-                    </ul>
+                    <?php $APPLICATION->IncludeComponent(
+                        'bitrix:system.auth.form',
+                        'auth_form_header',
+                        [
+                            'FORGOT_PASSWORD_URL' => '/auth/',              // Страница забытого пароля
+                            'PROFILE_URL' => '/personal/',                  // Страница профиля
+                            'REGISTER_URL' => '/auth/',                     // Страница регистрации
+                            'SHOW_ERRORS' => 'N',                           // Показывать ошибки
+                            'COMPONENT_TEMPLATE' => 'auth_form_header',     // Шаблон компонента
+                            'AUTHORIZE_URL' => '/auth/',                    // (Пользовательское) Страница авторизации
+                            'PERSONAL_DATA' => '/personal/profile/',        // (Пользовательское) Страница персональных данных
+                            'REDIRECT_URL' => '/',                          // (Пользовательское) страница перенаправления после выхода
+                        ],
+                    );?>
                 </div>
             </div>
         </div>
@@ -67,42 +63,24 @@ $asset->addJs(SITE_TEMPLATE_PATH . '/vendor/js/script.js');
                     </button>
                 </form>
 
-                <nav class="order-1">
-                    <ul class="block lg:flex">
-                        <li class="group">
-                            <a class="inline-block p-4 text-black font-bold border-l border-r border-transparent group-hover:text-orange group-hover:bg-gray-100 group-hover:border-l group-hover:border-r group-hover:border-gray-200 group-hover:shadow" href="catalog.html">
-                                Легковые
-                                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </a>
-
-                            <ul class="dropdown-navigation-submenu absolute hidden group-hover:block bg-white shadow-lg">
-                                <li><a class="block py-2 px-4 text-black hover:text-orange hover:bg-gray-100" href="catalog.html">Седаны</a></li>
-                                <li><a class="block py-2 px-4 text-black hover:text-orange hover:bg-gray-100" href="catalog.html">Хетчбеки</a></li>
-                                <li><a class="block py-2 px-4 text-black hover:text-orange hover:bg-gray-100" href="catalog.html">Универсалы</a></li>
-                                <li><a class="block py-2 px-4 text-black hover:text-orange hover:bg-gray-100" href="catalog.html">Купе</a></li>
-                                <li><a class="block py-2 px-4 text-black hover:text-orange hover:bg-gray-100" href="catalog.html">Родстеры</a></li>
-                            </ul>
-                        </li>
-                        <li class="group">
-                            <a class="inline-block p-4 text-black font-bold border-l border-r border-transparent group-hover:text-orange group-hover:bg-gray-100 group-hover:border-l group-hover:border-r group-hover:border-gray-200 group-hover:shadow" href="catalog.html">
-                                Внедорожники
-                                <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </a>
-                            <ul class="dropdown-navigation-submenu absolute hidden group-hover:block bg-white shadow-lg">
-                                <li><a class="block py-2 px-4 text-black hover:text-orange hover:bg-gray-100" href="catalog.html">Рамные</a></li>
-                                <li><a class="block py-2 px-4 text-black hover:text-orange hover:bg-gray-100" href="catalog.html">Пикапы</a></li>
-                                <li><a class="block py-2 px-4 text-black hover:text-orange hover:bg-gray-100" href="catalog.html">Кроссоверы</a></li>
-                            </ul>
-                        </li>
-                        <li class="group"><a class="inline-block p-4 text-black font-bold hover:text-orange" href="catalog.html">Раритетные</a></li>
-                        <li class="group"><a class="inline-block p-4 text-black font-bold hover:text-orange" href="catalog.html">Распродажа</a></li>
-                        <li class="group"><a class="inline-block p-4 text-black font-bold hover:text-orange" href="catalog.html">Новинки</a></li>
-                    </ul>
-                </nav>
+                <?php $APPLICATION->IncludeComponent(
+                    'bitrix:menu',
+                    'catalog_top',
+                    [
+                        'ROOT_MENU_TYPE' => 'top',          // Тип меню для первого уровня
+                        'CHILD_MENU_TYPE' => 'left',        // Тип меню для остальных уровней
+                        'DELAY' => 'N',                     // Откладывать выполнение шаблона меню
+                        'MAX_LEVEL' => '2',                 // Уровень вложенности меню
+                        'MENU_CACHE_GET_VARS' => [          // Значимые переменные запроса
+                            0 => '',
+                        ],
+                        'MENU_CACHE_TIME' => '3600',        // Время кеширования (сек.)
+                        'MENU_CACHE_TYPE' => 'A',           // Тип кеширования
+                        'MENU_CACHE_USE_GROUPS' => 'Y',     // Учитывать права доступа
+                        'USE_EXT' => 'Y',                   // Подключать файлы с именами вида .тип_меню.menu_ext.php
+                        'ALLOW_MULTI_SELECT' => 'N',        // Разрешить несколько активных пунктов одновременно
+                    ],
+                );?>
             </div>
         </div>
     </header>
