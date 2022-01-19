@@ -20,7 +20,7 @@
                             <a class="hover:text-orange" href="<?=$item['DETAIL_PAGE_URL']?>"><?=$item['PREVIEW_TEXT']?></a>
                         </p>
                     </div>
-                    <?php if (isset($item['TAGS']) && ! empty($item['TAGS'])) :?>
+                    <?php if (! empty($item['TAGS'])) :?>
                         <div>
                             <?php foreach (explode(',', $item['TAGS']) as $tag) :?>
                                 <span class="text-sm text-white italic rounded bg-orange px-2"><?=$tag?></span>

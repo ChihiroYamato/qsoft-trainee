@@ -19,12 +19,14 @@ $aMenuLinksExt = $APPLICATION->IncludeComponent(
 );
 
 array_walk($aMenuLinksExt, function (&$menu) use ($aMenuLinks) {
-    foreach ($aMenuLinks as $item) {
-        if ($menu[3]['IS_PARENT'] && $menu[0] === $item[0] && $menu[1] === $item[1]) {
-            $menu[2] = array_merge($item[2], $menu[2]);
-            $menu[3] = array_merge($item[3], $menu[3]);
-            $menu[4] = $item[4];
-            return;
+    if ($menu[3]['IS_PARENT']) {
+        foreach ($aMenuLinks as $item) {
+            if ($menu[0] === $item[0] && $menu[1] === $item[1]) {
+                $menu[2] = array_merge($item[2], $menu[2]);
+                $menu[3] = array_merge($item[3], $menu[3]);
+                $menu[4] = $item[4];
+                return;
+            }
         }
     }
 });
