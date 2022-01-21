@@ -153,23 +153,31 @@ class QsoftStoresComponent extends CBitrixComponent
     {
         if ($this->arParams['SHOW_MAP']) {
             $settings = [];
-            $lat = [];
-            $lon = [];
+            $arPoints = [];
             foreach ($this->arResult['ITEMS'] as $item) {
                 if (! empty($item['PROPERTY_MAP_VALUE'])) {
-                    $mark = explode(',', $item['PROPERTY_MAP_VALUE']);
-                    $lat[] = (float) $mark[0];
-                    $lon[] = (float) $mark[1];
-                    $settings['PLACEMARKS'][] = ['LAT' => $mark[0], 'LON' => $mark[1], 'TEXT' => $item['PROPERTY_ADDRESS_VALUE']];
+                   list($lat, $lon) = explode(',', $item['PROPERTY_MAP_VALUE']);
+                    $arPoints['lat'][] = (float) $lat;
+                    $arPoints['lon'][] = (float) $lon;
+                    $settings['PLACEMARKS'][] = ['LAT' => $lat, 'LON' => $lon, 'TEXT' => $item['PROPERTY_ADDRESS_VALUE']];
                 }
             }
-            $settings['yandex_scale'] = 11;
-            $settings['yandex_lat'] = ! empty($lat) ? (array_sum($lat) / count($lat)) : 55.75;
-            $settings['yandex_lon'] = ! empty($lon) ? (array_sum($lon) / count($lon)) : 37.62;
+            if (! empty($arPoints)) {
+                $settings['yandex_lat'] = (min($arPoints['lat']) + max($arPoints['lat']))/ 2;
+                $settings['yandex_lon'] = (min($arPoints['lon']) + max($arPoints['lon']))/ 2;
+                $settings['yandex_scale'] = $this->getMapScale($arPoints['lat'], $arPoints['lon']);
+            } else {
+                $settings['yandex_lat'] = 55.75;
+                $settings['yandex_lon'] = 37.62;
+                $settings['yandex_scale'] = 11;
+            }
 
+            var_dump($settings['yandex_scale']);
             $this->arResult['MAP_SETTINGS'] = serialize($settings);
         }
 
         return $this->arResult;
     }
+
+
 }
