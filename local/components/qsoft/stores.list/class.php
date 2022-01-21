@@ -172,12 +172,34 @@ class QsoftStoresComponent extends CBitrixComponent
                 $settings['yandex_scale'] = 11;
             }
 
-            var_dump($settings['yandex_scale']);
             $this->arResult['MAP_SETTINGS'] = serialize($settings);
         }
 
         return $this->arResult;
     }
 
+    // Возвращает скалирование карты в зависимости от максимальной удаленности точек на карте
+    protected function getMapScale(array $arLat, array $arLon) : int
+    {
+        // Собираем гипотетические точки  с максимально удаленными координатами, переводим в радианы
+        $pointA = ['lat' => deg2rad(min($arLat)), 'lon' => deg2rad(min($arLon))];
+        $pointB = ['lat' => deg2rad(max($arLat)), 'lon' => deg2rad(max($arLon))];
+
+        // Рассчитываем расстояние между точками в км
+        $distance = asin(sqrt(pow(sin(($pointB['lat'] - $pointA['lat']) / 2), 2) + cos($pointA['lat']) * cos($pointB['lat']) * pow(sin(($pointB['lon'] - $pointA['lon']) / 2), 2))) * 2 * 6367444 / 1000;
+
+        // Подбираем скалирование карты
+        $scale = 13;
+        $i = 0;
+        do {
+            $mapScale = 10 * pow(2, $i);
+            $i++;
+            if (--$scale <= 2) {
+                break;
+            }
+        } while ($mapScale < $distance);
+
+        return $scale;
+    }
 
 }
