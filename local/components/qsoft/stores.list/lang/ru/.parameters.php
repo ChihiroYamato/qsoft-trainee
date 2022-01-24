@@ -11,4 +11,6 @@ $MESS['DESC_NAME_NAME'] = 'Название';
 $MESS['DESC_ACT_NAME'] = 'Дата начала активности';
 $MESS['DESC_TSAMP_NAME'] = 'Дата последнего изменения';
 $MESS['ELEMENT_COUNT_NAME'] = 'Количество элементов на странице';
+$MESS['ELEMENT_LIMIT_NAME'] = 'Ограничить выборку элементов';
 $MESS['DETAILS_URL_NAME'] = 'URL-адрес ссылки на все элементы';
+$MESS['SHOW_MAP_NAME'] = 'Показывать карту';

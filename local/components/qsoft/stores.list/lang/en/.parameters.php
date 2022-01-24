@@ -11,4 +11,6 @@ $MESS['DESC_NAME_NAME'] = 'Name';
 $MESS['DESC_ACT_NAME'] = 'Activity start date';
 $MESS['DESC_TSAMP_NAME'] = 'Last modified date';
 $MESS['ELEMENT_COUNT_NAME'] = 'Element count on page';
+$MESS['ELEMENT_LIMIT_NAME'] = 'Limit the selection of elements';
 $MESS['DETAILS_URL_NAME'] = 'URL-adress of detail page';
+$MESS['SHOW_MAP_NAME'] = 'Show map';
