@@ -13,3 +13,7 @@ $MESS['AUTH_AGREEMENT'] = 'Consent to data processing';
 $MESS['AUTH_AGREEMENT_FULL'] = 'By checking the box you consent to the processing of personal data';
 $MESS['AUTH_REQ'] = 'Required fields.';
 $MESS['AUTH_AUTH'] = 'I have account';
+$MESS['PLACEHOLDER_NAME'] = 'Ivan';
+$MESS['PLACEHOLDER_LAST_NAME'] = 'Ivanov';
+$MESS['PLACEHOLDER_LOGIN'] = 'Ivan';
+$MESS['PLACEHOLDER_EMAIL'] = 'john@example.com';

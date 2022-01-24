@@ -19,19 +19,3 @@ EventManager::getInstance()->addEventHandler('main', 'OnAfterUserAuthorize', fun
     ];
     Event::sendImmediate($arSend);
 });
-
-EventManager::getInstance()->addEventHandler('main', 'OnAfterUserRegister', function ($arParams) {
-    if ($arParams['USER_ID']) {
-        $arSend = [
-            'EVENT_NAME' => 'NEW_USER',
-            'LID' => SITE_ID,
-            'FIELDS' => [
-                'NAME' => $arParams['NAME'],
-                'LAST_NAME' => $arParams['LAST_NAME'],
-                'LOGIN' => $arParams['LOGIN'],
-                'EMAIL' => $arParams['EMAIL'],
-            ],
-        ];
-        Event::sendImmediate($arSend);
-    }
-});

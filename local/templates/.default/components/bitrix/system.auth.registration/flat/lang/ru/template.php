@@ -13,3 +13,7 @@ $MESS['AUTH_AGREEMENT'] = 'Согласие на обработку данных
 $MESS['AUTH_AGREEMENT_FULL'] = 'Ставя галочку вы даете согласие на обработку персональных данных';
 $MESS['AUTH_REQ'] = 'Обязательные поля.';
 $MESS['AUTH_AUTH'] = 'У меня уже есть аккаунт';
+$MESS['PLACEHOLDER_NAME'] = 'Иван';
+$MESS['PLACEHOLDER_LAST_NAME'] = 'Иванов';
+$MESS['PLACEHOLDER_LOGIN'] = 'Ivan';
+$MESS['PLACEHOLDER_EMAIL'] = 'john@example.com';

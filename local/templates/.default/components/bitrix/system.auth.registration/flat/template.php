@@ -19,15 +19,15 @@ $APPLICATION->SetTitle(GetMessage('TITLE'));
         <div class="grid grid-cols-1 gap-6">
             <div class="block">
                 <label for="fieldName" class="text-gray-700 font-bold"><?=GetMessage('AUTH_NAME')?></label>
-                <input id="fieldName" type="text" name="USER_NAME" maxlength="255" value="<?=$arResult["USER_NAME"]?>" placeholder="Иван" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                <input id="fieldName" type="text" name="USER_NAME" maxlength="255" value="<?=$arResult["USER_NAME"]?>" placeholder="<?=GetMessage('PLACEHOLDER_NAME')?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
             </div>
             <div class="block">
                 <label for="fieldLstName" class="text-gray-700 font-bold"><?=GetMessage('AUTH_LAST_NAME')?></label>
-                <input id="fieldLstName" type="text" name="USER_LAST_NAME" maxlength="255" value="<?=$arResult['USER_LAST_NAME']?>" placeholder="Иванов" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                <input id="fieldLstName" type="text" name="USER_LAST_NAME" maxlength="255" value="<?=$arResult['USER_LAST_NAME']?>" placeholder="<?=GetMessage('PLACEHOLDER_LAST_NAME')?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
             </div>
             <div class="block">
                 <label for="fieldLogin" class="text-gray-700 font-bold"><span class="text-red-500 font-bold">*</span><?=GetMessage('AUTH_LOGIN')?></label>
-                <input id="fieldLogin" type="text" name="USER_LOGIN" maxlength="255" value="<?=$arResult['USER_LOGIN']?>" placeholder="Ivan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
+                <input id="fieldLogin" type="text" name="USER_LOGIN" maxlength="255" value="<?=$arResult['USER_LOGIN']?>" placeholder="<?=GetMessage('PLACEHOLDER_LOGIN')?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required />
             </div>
             <div class="block">
                 <label for="fieldPassword" class="text-gray-700 font-bold"><span class="text-red-500 font-bold">*</span><?=GetMessage('AUTH_PASSWORD')?></label>
@@ -40,7 +40,7 @@ $APPLICATION->SetTitle(GetMessage('TITLE'));
             <?php if ($arResult['EMAIL_REGISTRATION']) :?>
                 <div class="block">
                     <label for="fieldEmail" class="text-gray-700 font-bold"><?php if ($arResult['EMAIL_REQUIRED']) :?><span class="text-red-500 font-bold">*</span><?php endif?><?=GetMessage('AUTH_EMAIL')?></label>
-                    <input id="fieldEmail" name="USER_EMAIL" type="email" placeholder="john@example.com" value="<?=$arResult['USER_EMAIL']?>" maxlength="255" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" <?=($arResult['EMAIL_REQUIRED']) ? 'required' : ''?> />
+                    <input id="fieldEmail" name="USER_EMAIL" type="email" placeholder="<?=GetMessage('PLACEHOLDER_EMAIL')?>" value="<?=$arResult['USER_EMAIL']?>" maxlength="255" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" <?=($arResult['EMAIL_REQUIRED']) ? 'required' : ''?> />
                 </div>
             <?php endif?>
             <?php if ($arResult['PHONE_REGISTRATION']) :?>
