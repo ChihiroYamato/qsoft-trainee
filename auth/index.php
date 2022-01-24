@@ -2,7 +2,7 @@
 define('NEED_AUTH', true);
 require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
 ?>
-<?php if ($_REQUEST['register'] === 'yes') :?>
+<?php if ($_REQUEST['TYPE'] === 'REGISTRATION') :?>
     <?php $APPLICATION->SetTitle('Благодарим Вас за регистрацию в интернет-магазине «Рога и сила»!');?>
     <div>
         <p class="text-2xl text-grey-600 mb-4">Добро пожаловать!</p>

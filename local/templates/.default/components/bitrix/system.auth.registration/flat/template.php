@@ -1,15 +1,7 @@
 <?php if (! defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {die();}
 
 $APPLICATION->SetTitle(GetMessage('TITLE'));
-
-
-// echo '<pre>';
-// var_dump($arParams);
-// echo '<hr><hr><hr><hr><hr><hr><hr>';
-// var_dump($arResult);
-// echo '</pre>';
 ?>
-
 <?php if (isset($arParams['~AUTH_RESULT']['MESSAGE'])) :?>
     <?php foreach (explode('-----', trim(str_replace(['<br>', '<br />'], '-----', $arParams['~AUTH_RESULT']['MESSAGE']), '-----')) as $message) :?>
         <div class="my-4">
