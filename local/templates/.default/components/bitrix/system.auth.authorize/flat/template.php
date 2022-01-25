@@ -29,7 +29,7 @@ $APPLICATION->SetTitle(GetMessage('TITLE'));
         <div class="grid grid-cols-1 gap-6">
             <div class="block">
                 <label for="fieldName" class="text-gray-700 font-bold"><?=GetMessage('AUTH_LOGIN')?></label>
-                <input type="text" name="USER_LOGIN" maxlength="255" value="<?=$arResult["LAST_LOGIN"]?>" required minlength="2" placeholder="john" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                <input type="text" name="USER_LOGIN" maxlength="255" value="<?=$arResult["LAST_LOGIN"]?>" required minlength="2" placeholder="<?=GetMessage('PLACEHOLDER_LOGIN')?>" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
             </div>
             <div class="block">
                 <label for="fieldPassword" class="text-gray-700 font-bold"><?=GetMessage('AUTH_PASSWORD')?></label>

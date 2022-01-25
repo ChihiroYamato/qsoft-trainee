@@ -6,3 +6,4 @@ $MESS['AUTH_REMEMBER_ME'] = 'Запомнить меня на этом комп�
 $MESS['AUTH_AUTHORIZE'] = 'Войти';
 $MESS['AUTH_FORGOT_PASSWORD'] = 'Забыли пароль?';
 $MESS['AUTH_REGISTER'] = 'Зарегистрироваться';
+$MESS['PLACEHOLDER_LOGIN'] = 'john';

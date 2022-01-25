@@ -4,7 +4,10 @@ if (! defined('B_PROLOG_INCLUDED') || B_PROLOG_INCLUDED !== true) {die();}
 define('NO_IMAGE_PATH', '/images/no_car_image.png');
 define('SITE_TEMPLATE_DEFAULT', '/local/templates/.default');
 
-\Bitrix\Main\EventManager::getInstance()->addEventHandler('main', 'OnAfterUserAuthorize', function ($arParams) {
+use \Bitrix\Main\EventManager;
+use \Bitrix\Main\Mail\Event;
+
+EventManager::getInstance()->addEventHandler('main', 'OnAfterUserAuthorize', function ($arParams) {
     $arSend = [
         'EVENT_NAME' => 'USER_LOGIN',
         'LID' => SITE_ID,
@@ -14,5 +17,5 @@ define('SITE_TEMPLATE_DEFAULT', '/local/templates/.default');
             'DATE' => date('Y.m.d H:i:s'),
         ],
     ];
-    Bitrix\Main\Mail\Event::sendImmediate($arSend);
+    Event::sendImmediate($arSend);
 });

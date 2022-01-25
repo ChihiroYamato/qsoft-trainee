@@ -6,3 +6,4 @@ $MESS['AUTH_REMEMBER_ME'] = 'Remember me';
 $MESS['AUTH_AUTHORIZE'] = 'Authorize';
 $MESS['AUTH_FORGOT_PASSWORD'] = 'Forgot your password?';
 $MESS['AUTH_REGISTER'] = 'Register';
+$MESS['PLACEHOLDER_LOGIN'] = 'john';
