@@ -14,7 +14,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
         </ul>
         <p>Что Вы хотите сделать прямо сейчас?</p>
     </div>
-<?php elseif (false && isset($_REQUEST['backurl']) && $_REQUEST['backurl'] <> '' && preg_match('#^/#', $_REQUEST['backurl'])):?>
+<?php elseif (isset($_REQUEST['backurl']) && $_REQUEST['backurl'] <> '' && preg_match('#^/#', $_REQUEST['backurl'])):?>
     <script>
         document.location.href = "<?=CUtil::JSEscape($_REQUEST['backurl'])?>";
     </script>
