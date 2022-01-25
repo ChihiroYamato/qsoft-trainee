@@ -1,9 +1,5 @@
 $(function () {
 
-  $('[data-slick-carousel]').slick({
-    dots: true,
-  });
-
   $('[data-slick-carousel-auto]').slick({
     dots: true,
     autoplay: true,
