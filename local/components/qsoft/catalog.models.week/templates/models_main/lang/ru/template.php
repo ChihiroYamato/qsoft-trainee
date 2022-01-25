@@ -1,5 +1,5 @@
 <?php
 $MESS['BLOCK_NAME'] = 'Модели недели';
-$MESS['EDIT_LINK_TEXT'] = 'Редактировать салон';
-$MESS['DELETE_LINK_TEXT'] = 'Удалить салон';
+$MESS['EDIT_LINK_TEXT'] = 'Редактировать модель';
+$MESS['DELETE_LINK_TEXT'] = 'Удалить модель';
 $MESS['DELETE_CONFIRM'] = 'Будет удалена вся информация, связанная с этой записью. Продолжить?';
