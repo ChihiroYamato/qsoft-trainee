@@ -1,6 +1,7 @@
 <?php
 define('HIDE_SIDEBAR', true);
 require_once($_SERVER['DOCUMENT_ROOT'] .'/bitrix/header.php');
+$APPLICATION->SetTitle('Каталог');
 ?>
 <?php $APPLICATION->IncludeComponent(
 	'bitrix:catalog',

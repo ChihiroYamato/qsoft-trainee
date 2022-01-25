@@ -5,7 +5,7 @@ CHTTP::SetStatus('404 Not Found');
 @define('ERROR_404','Y');
 define('HIDE_SIDEBAR', true);
 
-require($_SERVER['DOCUMENT_ROOT'].'/bitrix/header.php');
+require_once($_SERVER['DOCUMENT_ROOT'] .'/bitrix/header.php');
 
 $APPLICATION->SetTitle('404 ошибка: Страница не найдена');
 $APPLICATION->SetPageProperty('NOT_SHOW_NAV_CHAIN', 'Y');
@@ -17,4 +17,4 @@ $APPLICATION->SetPageProperty('NOT_SHOW_NAV_CHAIN', 'Y');
     <p>Если Вы хотите что-то сообщить, напишите нам с помощью формы <a href="/company/contacts/"><b style="color: #ff7614">Обратная связь</b></a><p>
 </div>
 
-<?php require($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php');?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php');?>

@@ -18,6 +18,8 @@ while ($responseDB = $requestDB->GetNext()) {
 	$arIBlocks[$responseDB['~ID']] = "[{$responseDB['~ID']}] {$responseDB['~NAME']}";
 }
 
+$LimitElement = ($arCurrentValues['ELEMENT_LIMIT'] === 'Y');
+
 $arComponentParameters = [
     'PARAMETERS' => [
         'IBLOCK_TYPE' => [
@@ -37,12 +39,21 @@ $arComponentParameters = [
             'DEFAULT' => '4',
             'ADDITIONAL_VALUES' => 'N',
         ],
+        'ELEMENT_LIMIT' => [
+            'PARENT' => 'BASE',
+            'NAME' => GetMessage('ELEMENT_LIMIT_NAME'),
+            'TYPE' => 'CHECKBOX',
+            'DEFAULT' => 'N',
+            'ADDITIONAL_VALUES' => 'N',
+            'REFRESH' => 'Y',
+        ],
         'ELEMENT_COUNT' => [
             'PARENT' => 'BASE',
             'NAME' => GetMessage('ELEMENT_COUNT_NAME'),
-            'TYPE' => 'STRING',
+            'TYPE' => $LimitElement ? 'STRING' : 'LIST',
+            'VALUES' => [2 => '∞'],
             'DEFAULT' => '2',
-            'ADDITIONAL_VALUES' => 'Y',
+            'ADDITIONAL_VALUES' => $LimitElement ? 'Y' : 'N',
         ],
         'SORT_BY' => [
             'PARENT' => 'DATA_SOURCE',
@@ -68,6 +79,12 @@ $arComponentParameters = [
                 'DESC' => GetMessage('IBLOCK_DESC_DESC')
             ],
             'ADDITIONAL_VALUES' => 'N',
+        ],
+        'SHOW_MAP' => [
+            'PARENT' => 'ADDITIONAL_SETTINGS',
+            'NAME' => GetMessage('SHOW_MAP_NAME'),
+            'TYPE' => 'CHECKBOX',
+            'DEFAULT' => 'N',
         ],
         'DETAILS_URL' => [
             'PARENT' => 'ADDITIONAL_SETTINGS',
