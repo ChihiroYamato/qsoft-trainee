@@ -1,9 +1,10 @@
-<?
-require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
-$APPLICATION->SetTitle("Оплата заказа");
-?><?$APPLICATION->IncludeComponent(
-	"bitrix:sale.order.payment",
-	"",
-	Array(
-	)
-);?><?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");?>
+<?php
+require_once($_SERVER['DOCUMENT_ROOT'] .'/bitrix/header.php');
+$APPLICATION->SetTitle('Оплата заказа');
+?>
+<?php $APPLICATION->IncludeComponent(
+   'bitrix:sale.order.payment',
+   '',
+   []
+);?>
+<?php require_once($_SERVER['DOCUMENT_ROOT'].'/bitrix/footer.php');?>

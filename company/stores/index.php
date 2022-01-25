@@ -7,15 +7,15 @@ $APPLICATION->SetTitle('Наши салоны');
     'qsoft:stores.list',
     'stores_full',
     [
-        'DETAILS_URL' => '/company/stores/',
-        'ELEMENT_LIMIT' => 'N',
-        'IBLOCK_ID' => '4',
-        'IBLOCK_TYPE' => 'salons',
-        'SORT_BY' => 'NAME',
-        'SORT_ORDER' => 'DESC',
-        'CACHE_TYPE' => 'A',
-        'CACHE_TIME' => '3600',
-        'SHOW_MAP' => 'Y',
+        'DETAILS_URL' => '/company/stores/',    // URL-адрес ссылки на все элементы
+        'ELEMENT_LIMIT' => 'N',                 // Ограничить выборку элементов
+        'IBLOCK_ID' => '4',                     // Название Инфоблока (ID)
+        'IBLOCK_TYPE' => 'salons',              // Тип инфоблока
+        'SORT_BY' => 'NAME',                    // Поле сортировки
+        'SORT_ORDER' => 'DESC',                 // Порядок сортировки
+        'CACHE_TYPE' => 'A',                    // Тип кеширования
+        'CACHE_TIME' => '3600',                 // Время кеширования (сек.)
+        'SHOW_MAP' => 'Y',                      // Показывать карту
     ]
 );?>
 

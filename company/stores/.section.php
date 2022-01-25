@@ -1,3 +1,2 @@
-<?
-$sSectionName="Наши салоны";
-?>
+<?php
+$sSectionName = 'Наши салоны';
